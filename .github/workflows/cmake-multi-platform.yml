@@ -78,7 +78,19 @@ jobs:
       # Execute tests defined by the CMake configuration. Note that --build-config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       run: ctest --build-config ${{ matrix.build_type }}
-    
+      
+    - name: Prepare release binaries
+      if: startsWith(github.ref, 'refs/tags/')
+      shell: bash
+      run: |
+        if [[ "$RUNNER_OS" == "Linux" ]]; then
+          mv build/businessCalc build/businessCalc-linux
+        fi
+
+        if [[ "$RUNNER_OS" == "Windows" ]]; then
+          mv build/Release/businessCalc.exe build/businessCalc-windows.exe
+        fi
+
     - name: Create GitHub Release
       if: startsWith(github.ref, 'refs/tags/')
       uses: softprops/action-gh-release@v2
