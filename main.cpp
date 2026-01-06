@@ -1,7 +1,6 @@
 #include <iostream>
 using namespace std;
 
-
 float profitCalc(float fixedCosts, float variableCosts, float sellingPrice, int unitsSold) {
     float profitLoss { ((sellingPrice * unitsSold) - fixedCosts - (variableCosts * unitsSold)) };
     return profitLoss;
@@ -13,7 +12,6 @@ int main() {
     float sellingPriceGlobal;
     int unitsSoldGlobal;
     char wantsToQuit;
-
     while (true) {
         cout << "Please enter fixed costs." << endl << "> ";
         cin >> fixedCostsGlobal;
@@ -29,6 +27,7 @@ int main() {
         cout << "Variable costs: " << variableCostsGlobal * unitsSoldGlobal << endl;
         cout << "Fixed costs dont change. so: " << fixedCostsGlobal << endl;
         cout << "Total costs: " << (fixedCostsGlobal + variableCostsGlobal * unitsSoldGlobal) << endl;
+        cout << "Units needed to be sold to break even: " << (fixedCostsGlobal / (sellingPriceGlobal - variableCostsGlobal));
         cout << endl << endl;
         cout << "Would you like to quit? (Y/N)" << endl << "> ";
         cin >> wantsToQuit;
